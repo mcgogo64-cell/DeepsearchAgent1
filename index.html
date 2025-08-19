@@ -1,14 +1,29 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>DeepSearchAgent</title>
-  </head>
-  <body>
-    <h2>DeepSearchAgent Report</h2>
-    <form action="/report" method="post">
-      <label for="username">Enter Username:</label>
-      <input type="text" id="username" name="username" required>
-      <button type="submit">Generate PDF</button>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DeepsearchAgent – Username Check</title>
+  <style>
+    body{font-family:system-ui,Arial;margin:24px;max-width:740px}
+    .card{border:1px solid #ddd;border-radius:12px;padding:16px}
+    input{width:100%;padding:12px;border:1px solid #ccc;border-radius:8px}
+    button{padding:12px 16px;border:none;border-radius:8px;background:#111;color:#fff}
+    table{width:100%;border-collapse:collapse;margin-top:12px}
+    th,td{padding:8px;border-bottom:1px solid #eee;text-align:left}
+    .tag{padding:2px 8px;border-radius:12px;font-size:12px}
+    .ok{background:#e6ffed} .maybe{background:#fffbe6} .no{background:#ffeaea}
+  </style>
+</head>
+<body>
+  <h2>DeepsearchAgent – Username Check</h2>
+  <div class="card">
+    <form method="post" action="/search">
+      <label>Enter username</label><br/>
+      <input name="username" placeholder="e.g. samet_28_55" required />
+      <p style="color:#666;font-size:12px;margin:6px 0 12px">Public OSINT only. No login, no private data.</p>
+      <button type="submit">Search</button>
     </form>
-  </body>
+  </div>
+</body>
 </html>
