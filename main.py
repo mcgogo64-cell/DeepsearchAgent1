@@ -1,18 +1,23 @@
 from fastapi import FastAPI, Form
-from fastapi.responses import FileResponse
-from fpdf import FPDF
+from fastapi.responses import FileResponse, HTMLResponse
 
 app = FastAPI()
 
-@app.get("/")
+# Ana sayfa: index.html'i göster
+@app.get("/", response_class=HTMLResponse)
 def home():
-    return {"message": "DeepSearchAgent is running"}
+    with open("index.html", "r", encoding="utf-8") as f:
+        return f.read()
 
+# Form POST: rapor üret ve indir
 @app.post("/report")
 def generate_report(username: str = Form(...)):
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
-    pdf.cell(200, 10, txt=f"Report for {username}", ln=True, align="C")
-    pdf.output("report.pdf")
-    return FileResponse("report.pdf", media_type="application/pdf", filename="report.pdf")
+    content = (
+        f"DeepsearchAgent report for: {username}\n"
+        f"- Twitter: https://twitter.com/{username}\n"
+        f"- Instagram: https://instagram.com/{username}\n"
+    )
+    fname = f"{username}_report.txt"
+    with open(fname, "w", encoding="utf-8") as f:
+        f.write(content)
+    return FileResponse(fname, media_type="text/plain", filename=fname)
